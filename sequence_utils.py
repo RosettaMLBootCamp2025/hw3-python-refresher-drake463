@@ -34,7 +34,12 @@ def molecular_weight(protein_seq):
     # TODO: Implement this function
     # Hint: Loop through the sequence and sum up the weights
     # Hint: Subtract 18.01 for each peptide bond (number of residues - 1) to account for water loss
-    pass
+    mw_seq = 0
+
+    for aa in protein_seq:
+        mw_seq += aa_weights[aa]
+    mw_seq = mw_seq -18.01*(len(protein_seq)-1)
+    return mw_seq
 
 
 # Exercise 2: Count Hydrophobic Residues
@@ -59,7 +64,12 @@ def count_hydrophobic(protein_seq):
 
     # TODO: Implement this function
     # Hint: Use a for loop or sum() with a generator expression
-    pass
+    n_hyd_res = 0
+
+    for aa in protein_seq:
+        if aa in hydrophobic:
+            n_hyd_res += 1
+    return n_hyd_res
 
 
 # Exercise 3: Find Motif Positions
@@ -81,8 +91,12 @@ def find_motif(seq, motif):
     """
     # TODO: Implement this function
     # Hint: Loop through the sequence and check if seq[i:i+len(motif)] == motif
-    pass
+    motif_list = []
 
+    for i, res in enumerate(seq):
+        if seq[i:i+len(motif)] == motif:
+            motif_list.append(i)
+    return motif_list
 
 # Exercise 4: Calculate Isoelectric Point (Simplified)
 # TODO: Implement a simplified function to estimate the isoelectric point
@@ -108,7 +122,17 @@ def count_charged_residues(protein_seq):
 
     # TODO: Implement this function
     # Return a tuple of (number of positive, number of negative)
-    pass
+    
+    pos_res = 0
+    neg_res = 0
+
+    for res in protein_seq:
+        if res in positive:
+            pos_res += 1
+        if res in negative:
+            neg_res += 1
+    charged_res = (pos_res,neg_res)
+    return charged_res
 
 
 # Test your functions

@@ -22,7 +22,9 @@ def reverse_string(s):
         'FEDCA'
     """
     # TODO: Implement this function
-    pass
+    rs = s[::-1]
+
+    return rs
 
 
 # Exercise 2: Character Counter
@@ -43,7 +45,13 @@ def count_characters(s):
         {'A': 2, 'C': 1, 'D': 1, 'E': 1}
     """
     # TODO: Implement this function using a for loop
-    pass
+    counts = {}
+    for i, char in enumerate(s):
+        if char not in counts:
+            counts[char] = 1
+        else:
+            counts[char] += 1
+    return counts
 
 
 # Exercise 3: Amino Acid Composition
@@ -65,7 +73,19 @@ def amino_acid_composition(protein_seq):
     """
     # TODO: Implement this function
     # Hint: Use count_characters() and calculate percentages
-    pass
+    counts = {}
+    for i, aa in enumerate(protein_seq):
+        if aa not in counts:
+            counts[aa] = 1
+        else:
+            counts[aa] += 1
+    aa_tot = 0
+    for aa in counts:
+        aa_tot += counts[aa]
+    pers = {}
+    for aa in counts:
+        pers[aa] = 100*(counts[aa]/aa_tot)
+    return pers
 
 
 # Exercise 4: List Comprehension
@@ -87,7 +107,11 @@ def filter_sequences_by_length(sequences, min_length):
         ['AC', 'ACDE']
     """
     # TODO: Implement this using a list comprehension
-    pass
+    filtered_sequences = []
+    for seq in sequences:
+        if len(seq) >= min_length:
+            filtered_sequences.append(seq)
+    return filtered_sequences
 
 
 # Test your functions
