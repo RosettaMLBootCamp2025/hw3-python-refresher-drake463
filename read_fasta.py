@@ -43,8 +43,13 @@ def read_fasta(filename):
     # 5. Store sequences in the dictionary with header as key
 
     try:
-        # TODO: Open and parse the file
-        pass
+        with open(filename,'r') as f:
+            f = f.readlines()
+        for i, line in enumerate(f):
+            if line.startswith('>'):
+                sequences[line.strip()[1:]] = f[i+1].strip()
+        #print(sequences)
+        return sequences 
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found!")
         return {}
@@ -64,7 +69,9 @@ def print_fasta_stats(sequences):
     # Print:
     # - Total number of sequences
     # - For each sequence: header, length, first 50 amino acids
-    pass
+    print('Total number of sequences = '+str(len(sequences)))
+    for seq in sequences:
+        print(seq+'\n'+str(len(sequences[seq]))+'\n'+sequences[seq][0:50])
 
 
 # Test your functions
